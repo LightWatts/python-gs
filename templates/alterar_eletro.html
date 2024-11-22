@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +51,8 @@
             font-size: 16px;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -77,12 +79,13 @@
             color: red;
             font-size: 14px;
         }
-        
+
         .form-group {
             margin-bottom: 15px;
         }
 
-        .form-group select, .form-group input {
+        .form-group select,
+        .form-group input {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -104,9 +107,9 @@
         .btn-back:hover {
             background-color: #5a6268;
         }
-
     </style>
 </head>
+
 <body>
     <header>
         <h1>Alterar Eletrônico</h1>
@@ -122,27 +125,36 @@
                 <label for="novo_nome">Novo Nome:</label>
                 <select id="novo_nome" name="novo_nome" required>
                     <option value="" disabled>Selecione o eletrônico</option>
-                    <option value="Geladeira" {% if eletro[2] = "Geladeira" %}selected{% endif %}>Geladeira</option>
-                    <option value="Fogão" {% if eletro[2] ="Fogão" %}selected{% endif %}>Fogão</option>
-                    <option value="Micro-ondas" {% if eletro[2] ="Micro-ondas" %}selected{% endif %}>Micro-ondas</option>
-                    <option value="Máquina de Lavar" {% if eletro[2] = "Máquina de Lavar" %}selected{% endif %}>Máquina de Lavar</option>
-                    <option value="Aspirador de Pó" {% if eletro[2] ="Aspirador de Pó" %}selected{% endif %}>Aspirador de Pó</option>
-                    <option value="Ar-condicionado" {% if eletro[2] ="Ar-condicionado" %}selected{% endif %}>Ar-condicionado</option>
-                    <option value="Liquidificador" {% if eletro[2] = "Liquidificador" %}selected{% endif %}>Liquidificador</option>
-                    <option value="Forno Elétrico" {% if eletro[2] = "Forno Elétrico" %}selected{% endif %}>Forno Elétrico</option>
-                    <option value="Cafeteira" {% if eletro[2] = "Cafeteira" %}selected{% endif %}>Cafeteira</option>
-                    <option value="Chaleira Elétrica" {% if eletro[2] = "Chaleira Elétrica" %}selected{% endif %}>Chaleira Elétrica</option>
+                    <option value="Geladeira" {% if eletro[2]=="Geladeira" %}selected{% endif %}>Geladeira</option>
+                    <option value="Fogão" {% if eletro[2]=="Fogão" %}selected{% endif %}>Fogão</option>
+                    <option value="Micro-ondas" {% if eletro[2]=="Micro-ondas" %}selected{% endif %}>Micro-ondas
+                    </option>
+                    <option value="Máquina de Lavar" {% if eletro[2]=="Máquina de Lavar" %}selected{% endif %}>Máquina
+                        de Lavar</option>
+                    <option value="Aspirador de Pó" {% if eletro[2]=="Aspirador de Pó" %}selected{% endif %}>Aspirador
+                        de Pó</option>
+                    <option value="Ar-condicionado" {% if eletro[2]=="Ar-condicionado" %}selected{% endif %}>
+                        Ar-condicionado</option>
+                    <option value="Liquidificador" {% if eletro[2]=="Liquidificador" %}selected{% endif %}>
+                        Liquidificador</option>
+                    <option value="Forno Elétrico" {% if eletro[2]=="Forno Elétrico" %}selected{% endif %}>Forno
+                        Elétrico</option>
+                    <option value="Cafeteira" {% if eletro[2]=="Cafeteira" %}selected{% endif %}>Cafeteira</option>
+                    <option value="Chaleira Elétrica" {% if eletro[2]=="Chaleira Elétrica" %}selected{% endif %}>
+                        Chaleira Elétrica</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="nova_marca">Nova Marca:</label>
-                <input type="text" id="nova_marca" name="nova_marca" value="{{ eletro[3] }}" required placeholder="Digite a nova marca">
+                <input type="text" id="nova_marca" name="nova_marca" value="{{ eletro[3] }}" required
+                    placeholder="Digite a nova marca">
             </div>
 
             <div class="form-group">
                 <label for="novo_hora">Nova Hora (h):</label>
-                <input type="number" id="novo_hora" name="novo_hora" step="1" value="{{ eletro[4] }}" required placeholder="Digite a nova hora">
+                <input type="number" id="novo_hora" name="novo_hora" step="1" value="{{ eletro[4] }}" required
+                    placeholder="Digite a nova hora">
             </div>
 
             <button type="submit">Salvar Alterações</button>
@@ -151,4 +163,5 @@
         <a href="/consultar_eletro" class="btn-back">Voltar para a lista de eletrônicos</a>
     </main>
 </body>
+
 </html>

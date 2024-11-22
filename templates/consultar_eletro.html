@@ -6,15 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Eletrônicos</title>
     <style>
-        /* Adicione o estilo que você já tem aqui */
+        /* Estilos gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        /* Estilo para o conteúdo principal */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        table a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Botões */
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo para a confirmação de exclusão */
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <h1>Eletrônicos Cadastrados</h1>
-        <a href="/">Voltar ao Início</a>
-        <a href="/inserir_eletro">Cadastrar Novo</a>
+        <a href="/" class="btn">Voltar ao Início</a>
+        <a href="/inserir_eletro" class="btn">Cadastrar Novo</a>
     </header>
     <main>
         {% if eletrodomesticos %}
@@ -35,11 +139,12 @@
                     <td>{{ eletrodomestico[0] }}</td>
                     <td>{{ eletrodomestico[4] }}</td> <!-- Cliente ID -->
                     <td>{{ eletrodomestico[2] }}</td> <!-- Nome -->
-                    <td>{{ eletrodomestico[3] }}</td> <!-- Marca -->
                     <td>{{ eletrodomestico[1] }}</td> <!-- Hora -->
+                    <td>{{ eletrodomestico[3] }}</td> <!-- Marca -->
                     <td>
-                        <a href="{{ url_for('alterar_eletro', id=eletrodomestico[0]) }}">Alterar</a>
-                        <a href="javascript:void(0);" onclick="confirmDelete({{ eletrodomestico[0] }})">Deletar</a>
+                        <a href="{{ url_for('alterar_eletro', id=eletrodomestico[0]) }}" class="btn">Alterar</a>
+                        <a href="javascript:void(0);" onclick="confirmDelete('{{ eletrodomestico[0] }}')"
+                            class="btn-danger">Deletar</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -50,6 +155,7 @@
         {% endif %}
     </main>
     <script>
+        // Função para confirmar exclusão de eletrônico
         function confirmDelete(id) {
             if (confirm("Você tem certeza que deseja excluir este eletrônico?")) {
                 window.location.href = '/deletar_eletro/' + id;
