@@ -6,34 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Eletrônico</title>
     <style>
-        /* Inserir estilo para o formulário */
+        /* Estilo básico para a estrutura */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
             margin: 0;
             padding: 0;
         }
 
-        header {
-            background-color: #4CAF50;
-            padding: 10px;
+        h1{
             color: white;
-            text-align: center;
         }
 
-        a {
+        header {
+            background-color: #000;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        header a {
             color: white;
             text-decoration: none;
             font-size: 1.1em;
+            margin-top: 10px;
+            display: block;
+            text-transform: none;
         }
 
         main {
-            padding: 20px;
-            max-width: 800px;
+            padding: 40px;
+            max-width: 700px;
             margin: 0 auto;
             background-color: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
         }
 
         form {
@@ -42,29 +58,46 @@
         }
 
         form label {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            color: #333;
         }
 
         form input,
         form select {
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            background-color: #f8f8f8;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        form input:focus,
+        form select:focus {
+            outline: none;
+            border-color: #000;
+            background-color: #fff;
         }
 
         form button {
-            padding: 10px;
-            background-color: #4CAF50;
+            padding: 12px;
+            background-color: #000;
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
 
         form button:hover {
-            background-color: #45a049;
+            background-color: #333;
+        }
+
+        form button:active {
+            background-color: #555;
         }
 
         /* Estilos para mensagens de flash (sucesso e erro) */
@@ -76,21 +109,17 @@
         li.success {
             background-color: #d4edda;
             color: #155724;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         li.error {
             background-color: #f8d7da;
             color: #721c24;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        li {
-            margin: 5px 0;
+            margin-bottom: 20px;
         }
     </style>
 </head>

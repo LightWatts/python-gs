@@ -1,4 +1,3 @@
-<!-- consultar_eletro.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -12,19 +11,20 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: white;
             color: #333;
         }
 
         header {
-            background-color: #333;
+            background-color: #000;
             color: white;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         header a {
-            color: #fff;
+            color: white;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
@@ -36,13 +36,17 @@
 
         h1 {
             margin: 0;
+            font-size: 2.5rem;
         }
 
         /* Estilo para o conteúdo principal */
         main {
-            padding: 20px;
+            padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
         }
 
         table {
@@ -53,51 +57,59 @@
 
         table th,
         table td {
-            padding: 12px;
+            padding: 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #ccc;
+            font-size: 1rem;
         }
 
         table th {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #000;
+            color: #fff;
+            text-transform: uppercase;
         }
 
         table tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
         }
 
         table tr:hover {
-            background-color: #ddd;
+            background-color: #f1f1f1;
         }
 
         table a {
-            color: #007BFF;
+            color: #333;
             text-decoration: none;
+            font-weight: bold;
         }
 
         table a:hover {
+            color: #000;
             text-decoration: underline;
         }
 
         p {
-            font-size: 18px;
-            color: #555;
+            font-size: 1.2rem;
+            color: #888;
             text-align: center;
         }
 
         /* Botões */
         .btn {
-            background-color: #007BFF;
+            background-color: #000;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 10px;
+            display: inline-block;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #333;
+            border-color: #333;
         }
 
         /* Estilo para a confirmação de exclusão */
@@ -107,10 +119,41 @@
             padding: 5px 15px;
             border-radius: 5px;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         .btn-danger:hover {
             background-color: #c82333;
+        }
+
+        /* Estilos de Responsividade */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            table th,
+            table td {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .btn-danger {
+                width: 100%;
+                padding: 12px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -121,6 +164,7 @@
         <a href="/" class="btn">Voltar ao Início</a>
         <a href="/inserir_eletro" class="btn">Cadastrar Novo</a>
     </header>
+
     <main>
         {% if eletrodomesticos %}
         <table>
@@ -155,6 +199,7 @@
         <p>Nenhum eletrônico encontrado.</p>
         {% endif %}
     </main>
+
     <script>
         // Função para confirmar exclusão de eletrônico
         function confirmDelete(id) {

@@ -5,6 +5,132 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar Eletrônico</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+        }
+
+        /* Cabeçalho */
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2rem;
+            color: #111;
+        }
+
+        /* Estilo para o conteúdo principal */
+        main {
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Estilos do formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        /* Estilos para mensagens de flash (sucesso e erro) */
+        ul {
+            padding: 0;
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        li.success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            main {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            label {
+                font-size: 1rem;
+            }
+
+            input {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <h2>Alterar Eletrônico</h2>

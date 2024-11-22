@@ -4,62 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_index.css">
     <title>Gestão de Eletrodomésticos</title>
     <style>
         /* Estilo básico para estrutura */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #fff;
+            color: #333;
         }
 
         .container {
-            width: 80%;
+            width: 60%;
             margin: 0 auto;
             text-align: center;
-            padding: 40px;
+            padding: 40px 0;
         }
 
         h1 {
             color: #333;
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
         }
 
         ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         li {
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         a {
             text-decoration: none;
             color: #fff;
-            background-color: #007bff;
-            padding: 12px 20px;
-            font-size: 18px;
+            background-color: #333;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            letter-spacing: 1px;
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #555;
+            transform: translateY(-5px);
         }
 
-        .main-content {
-            margin-top: 40px;
+        a:active {
+            background-color: #444;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Bem-vindo à Gestão de Eletrodomésticos</h1>
+        <h1>Bem-vindo à Lightwatts</h1>
         <div class="main-content">
             <ul>
                 <li><a href="/inserir_eletro">Inserir Eletrodoméstico</a></li>
