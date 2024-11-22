@@ -81,6 +81,30 @@ def consultar_eletro():
     print(f"Eletrônicos encontrados: {eletrodomesticos}")
     return render_template('consultar_eletro.html', eletrodomesticos=eletrodomesticos)
 
+
+@app.route('/inserir_eletro', methods=['GET', 'POST'])
+def inserir_eletro():
+    if request.method == 'POST':
+        cliente_id = request.form.get('cliente_id')
+        nome = request.form.get('nome')
+        marca = request.form.get('marca')
+        hora = request.form.get('hora')
+        # Verifica se todos os campos foram preenchidos
+        if not (cliente_id and nome and marca and hora):
+            flash("Todos os campos são obrigatórios.", "error")
+            return redirect(url_for('inserir_eletro'))
+        # Insere o novo eletrônico
+        query_insert = """
+            INSERT INTO eletronicos (cliente_id, tipo, marca, horas)
+            VALUES (:1, :2, :3, :4)
+        """
+        success = executar_query(query_insert, (cliente_id, nome, marca, hora))
+        return redirect(url_for('inserir_eletro'))
+    
+    # Carrega as marcas e tipos (opcionais para preencher em um formulário ou de consulta)
+    return render_template("inserir_eletro.html")
+
+
 # Alterar Eletrônico
 @app.route('/alterar_eletro/<int:id>', methods=['GET', 'POST'])
 def alterar_eletro(id):
@@ -118,6 +142,21 @@ def alterar_eletro(id):
         return render_template('alterar_eletro.html', eletro=eletro[0])
 
     flash("Eletrônico não encontrado.", "error")
+    return redirect(url_for('consultar_eletro'))
+
+# Deletar Eletrônico
+@app.route('/deletar_eletro/<int:id>', methods=['GET', 'POST'])
+def deletar_eletro(id):
+    # Deletando o eletrônico com o ID fornecido
+    query = "DELETE FROM eletronicos WHERE id = :1"
+    sucesso = executar_query(query, (id,))
+
+    if sucesso:
+        flash("Eletrônico deletado com sucesso!", "success")
+    else:
+        flash("Erro ao deletar eletrônico.", "error")
+
+    # Redireciona de volta para a página de consulta de eletrônicos
     return redirect(url_for('consultar_eletro'))
 
 # Inicialização do Flask
