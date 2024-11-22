@@ -70,32 +70,6 @@ def executar_query(query, params=None, fetch=False):
 def index():
     return render_template("index.html")
 
-# Rota para Inserir Eletrônico
-@app.route('/inserir_eletro', methods=['GET', 'POST'])
-def inserir_eletro():
-    if request.method == 'POST':
-        cliente_id = request.form.get('cliente_id')
-        nome = request.form.get('nome')
-        marca = request.form.get('marca')
-        hora = request.form.get('hora')
-
-        # Verifica se todos os campos foram preenchidos
-        if not (cliente_id and nome and marca and hora):
-            flash("Todos os campos são obrigatórios.", "error")
-            return redirect(url_for('inserir_eletro'))
-
-        # Insere o novo eletrônico
-        query_insert = """
-            INSERT INTO eletronicos (cliente_id, tipo, marca, horas)
-            VALUES (:1, :2, :3, :4)
-        """
-        success = executar_query(query_insert, (cliente_id, nome, marca, hora))
-
-        return redirect(url_for('inserir_eletro'))
-    
-    # Carrega as marcas e tipos (opcionais para preencher em um formulário ou de consulta)
-    return render_template("inserir_eletro.html")
-
 # Consultar Eletrônicos
 @app.route('/consultar_eletro', methods=['GET'])
 def consultar_eletro():
@@ -104,69 +78,48 @@ def consultar_eletro():
         FROM eletronicos
     """
     eletrodomesticos = executar_query(query, fetch=True)
-
-    # Adicionando um log para depuração
     print(f"Eletrônicos encontrados: {eletrodomesticos}")
-
     return render_template('consultar_eletro.html', eletrodomesticos=eletrodomesticos)
 
 # Alterar Eletrônico
 @app.route('/alterar_eletro/<int:id>', methods=['GET', 'POST'])
 def alterar_eletro(id):
     if request.method == 'POST':
-        marca = request.form.get('marca')
-        tipo = request.form.get('tipo')
-        horas = request.form.get('horas')
+        novo_nome = request.form.get('novo_nome')  # Novo nome (tipo do eletrônico)
+        nova_marca = request.form.get('nova_marca')  # Nova marca
+        novo_hora = request.form.get('novo_hora')  # Nova hora
 
-        if not (marca and tipo and horas):
+        # Verificando se todos os campos foram preenchidos
+        if not (novo_nome and nova_marca and novo_hora):
             flash("Todos os campos são obrigatórios.", "error")
-            return redirect(url_for('alterar_eletro', id=id))
+            return redirect(url_for('alterar_eletro', id=id))  # Redireciona de volta caso falte campo
 
+        # Atualizando os dados no banco de dados
         query = """
             UPDATE eletronicos
-            SET marca = :1, tipo = :2, horas = :3
+            SET tipo = :1, marca = :2, horas = :3
             WHERE id = :4
         """
-        if executar_query(query, (marca, tipo, horas, id)):
+        sucesso = executar_query(query, (novo_nome, nova_marca, novo_hora, id))
+
+        if sucesso:
             flash("Eletrônico atualizado com sucesso!", "success")
         else:
             flash("Erro ao atualizar eletrônico.", "error")
+
+        # Redireciona para a página de consulta de eletrônicos após a atualização
         return redirect(url_for('consultar_eletro'))
 
-    query = "SELECT marca, tipo, horas FROM eletronicos WHERE id = :1"
+    # Quando a página é carregada via GET, busca os dados do eletrônico para preencher o formulário
+    query = "SELECT id, tipo, marca, horas FROM eletronicos WHERE id = :1"
     eletro = executar_query(query, (id,), fetch=True)
+
     if eletro:
         return render_template('alterar_eletro.html', eletro=eletro[0])
+
     flash("Eletrônico não encontrado.", "error")
     return redirect(url_for('consultar_eletro'))
 
-# Deletar Eletrônico
-@app.route('/deletar_eletro/<int:id>', methods=['GET'])
-def deletar_eletro(id):
-    query = "DELETE FROM eletronicos WHERE id = :1"
-    if executar_query(query, (id,)):
-        flash("Eletrônico deletado com sucesso!", "success")
-    else:
-        flash("Erro ao deletar eletrônico.", "error")
-    return redirect(url_for('consultar_eletro'))
-
-# Relatório
-@app.route('/relatorio', methods=['GET'])
-def relatorio():
-    cliente_id = request.args.get('cliente_id')
-
-    if not cliente_id:
-        flash("Informe o ID do cliente.", "error")
-        return render_template('relatorio.html', media=None)
-
-    query = """
-        SELECT AVG(horas)
-        FROM eletronicos
-        WHERE cliente_id = :1
-    """
-    resultado = executar_query(query, (cliente_id,), fetch=True)
-    media = resultado[0][0] if resultado and resultado[0][0] else 0
-    return render_template('relatorio.html', media=media)
-
+# Inicialização do Flask
 if __name__ == '__main__':
     app.run(debug=True)
