@@ -159,6 +159,51 @@ def deletar_eletro(id):
     # Redireciona de volta para a página de consulta de eletrônicos
     return redirect(url_for('consultar_eletro'))
 
+@app.route('/relatorio', methods=['GET'])
+def relatorio():
+    # Consulta todos os eletrônicos para relatório geral
+    query = """
+        SELECT tipo, marca, horas, cliente_id
+        FROM eletronicos
+    """
+    dados_eletronicos = executar_query(query, fetch=True)
+    
+    # Relatório de Eletrônicos por Tipo
+    query_tipo = """
+        SELECT tipo, COUNT(*) as quantidade
+        FROM eletronicos
+        GROUP BY tipo
+    """
+    dados_por_tipo = executar_query(query_tipo, fetch=True)
+    
+    # Relatório de Horas por Marca
+    query_marca = """
+        SELECT marca, SUM(horas) as total_horas
+        FROM eletronicos
+        GROUP BY marca
+    """
+    dados_por_marca = executar_query(query_marca, fetch=True)
+    
+    # Relatório dos Eletrônicos mais Usados
+    query_mais_usados = """
+        SELECT tipo, marca, MAX(horas) as max_horas
+        FROM eletronicos
+        GROUP BY tipo, marca
+        ORDER BY max_horas DESC
+    """
+    mais_usados = executar_query(query_mais_usados, fetch=True)
+
+    # Calcular média de horas
+    if dados_eletronicos:
+        total_horas = sum([eletro[2] for eletro in dados_eletronicos])
+        media_horas = total_horas / len(dados_eletronicos)
+        return render_template('relatorio.html', media=media_horas, eletrônicos=dados_eletronicos,
+                               tipo_relatorio=dados_por_tipo, marca_relatorio=dados_por_marca,
+                               mais_usados=mais_usados)
+    else:
+        return render_template('relatorio.html', media=None, mensagem="Nenhum eletrônico encontrado.")
+
+
 # Inicialização do Flask
 if __name__ == '__main__':
     app.run(debug=True)
