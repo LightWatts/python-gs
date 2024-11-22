@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Eletrônicos</title>
+    <style>
+        /* Adicione o estilo que você já tem aqui */
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Eletrônicos Cadastrados</h1>
+        <a href="/">Voltar ao Início</a>
+        <a href="/inserir_eletro">Cadastrar Novo</a>
+    </header>
+    <main>
+        {% if eletrodomesticos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente ID</th>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Hora (h)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for eletrodomestico in eletrodomesticos %}
+                <tr>
+                    <td>{{ eletrodomestico[0] }}</td>
+                    <td>{{ eletrodomestico[4] }}</td> <!-- Cliente ID -->
+                    <td>{{ eletrodomestico[2] }}</td> <!-- Nome -->
+                    <td>{{ eletrodomestico[3] }}</td> <!-- Marca -->
+                    <td>{{ eletrodomestico[1] }}</td> <!-- Hora -->
+                    <td>
+                        <a href="{{ url_for('alterar_eletro', id=eletrodomestico[0]) }}">Alterar</a>
+                        <a href="javascript:void(0);" onclick="confirmDelete({{ eletrodomestico[0] }})">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Nenhum eletrônico encontrado.</p>
+        {% endif %}
+    </main>
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Você tem certeza que deseja excluir este eletrônico?")) {
+                window.location.href = '/deletar_eletro/' + id;
+            }
+        }
+    </script>
+</body>
+
+</html>

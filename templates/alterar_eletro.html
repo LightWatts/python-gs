@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Eletrônico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Alterar Eletrônico</h1>
+    </header>
+    <main>
+        <form action="/alterar_eletro/{{ eletro[0] }}" method="post">
+            <div class="form-group">
+                <label for="id">ID do Eletrônico:</label>
+                <input type="text" id="id" name="id" value="{{ eletro[0] }}" readonly required>
+            </div>
+
+            <div class="form-group">
+                <label for="novo_nome">Novo Nome:</label>
+                <select id="novo_nome" name="novo_nome" required>
+                    <option value="" disabled>Selecione o eletrônico</option>
+                    <option value="Geladeira" {% if eletro[2] = "Geladeira" %}selected{% endif %}>Geladeira</option>
+                    <option value="Fogão" {% if eletro[2] ="Fogão" %}selected{% endif %}>Fogão</option>
+                    <option value="Micro-ondas" {% if eletro[2] ="Micro-ondas" %}selected{% endif %}>Micro-ondas</option>
+                    <option value="Máquina de Lavar" {% if eletro[2] = "Máquina de Lavar" %}selected{% endif %}>Máquina de Lavar</option>
+                    <option value="Aspirador de Pó" {% if eletro[2] ="Aspirador de Pó" %}selected{% endif %}>Aspirador de Pó</option>
+                    <option value="Ar-condicionado" {% if eletro[2] ="Ar-condicionado" %}selected{% endif %}>Ar-condicionado</option>
+                    <option value="Liquidificador" {% if eletro[2] = "Liquidificador" %}selected{% endif %}>Liquidificador</option>
+                    <option value="Forno Elétrico" {% if eletro[2] = "Forno Elétrico" %}selected{% endif %}>Forno Elétrico</option>
+                    <option value="Cafeteira" {% if eletro[2] = "Cafeteira" %}selected{% endif %}>Cafeteira</option>
+                    <option value="Chaleira Elétrica" {% if eletro[2] = "Chaleira Elétrica" %}selected{% endif %}>Chaleira Elétrica</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nova_marca">Nova Marca:</label>
+                <input type="text" id="nova_marca" name="nova_marca" value="{{ eletro[3] }}" required placeholder="Digite a nova marca">
+            </div>
+
+            <div class="form-group">
+                <label for="novo_hora">Nova Hora (h):</label>
+                <input type="number" id="novo_hora" name="novo_hora" step="1" value="{{ eletro[4] }}" required placeholder="Digite a nova hora">
+            </div>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+
+        <a href="/consultar_eletro" class="btn-back">Voltar para a lista de eletrônicos</a>
+    </main>
+</body>
+</html>
